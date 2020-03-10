@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+  
+before_install:
+  - docker build -t bmalecky/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true bmalecky/react-test npm test
+
+after_success:
+  - docker build -t bmalecky/multi-client ./client
+  - docker build -t bmalecky/multi-nginx ./nginx
+  - docker build -t bmalecky/multi-server ./server
+  - docker build -t bmalecky/multi-worker ./worker
+  # log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+# take those images and push them to docker hub    
+  - docker push bmalecky/multi-client
+  - docker push bmalecky/multi-nginx
+  - docker push bmalecky/multi-server
+  - docker push bmalecky/multi-worker
+  
