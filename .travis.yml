@@ -16,8 +16,8 @@ after_success:
   # log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 # take those images and push them to docker hub    
-  - docker push bmalecky/multi-client
-  - docker push bmalecky/multi-nginx
-  - docker push bmalecky/multi-server
-  - docker push bmalecky/multi-worker
+  - docker push bmaleckysandbox/multi-client
+  - docker push bmaleckysandbox/multi-nginx
+  - docker push bmaleckysandbox/multi-server
+  - docker push bmaleckysandbox/multi-worker
   
