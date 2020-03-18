@@ -12,6 +12,6 @@ docker push bmaleckysandbox/multi-worker:$SHA
 
 kubectl apply -f k8s
 
-kubectl set image deployments/client-deployment server=bmaleckysandbox/multi-server:$SHA
-kubectl set image deployments/server-deployment client=bmaleckysandbox/multi-client:$SHA
+kubectl set image deployments/client-deployment client=bmaleckysandbox/multi-client:$SHA
+kubectl set image deployments/server-deployment server=bmaleckysandbox/multi-server:$SHA
 kubectl set image deployments/worker-deployment worker=bmaleckysandbox/multi-worker:$SHA
