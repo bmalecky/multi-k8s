@@ -10,4 +10,9 @@ before_install:
   - gcloud config set project multi-k8s-271511
   - gcloud config set compute/zone us-east1-b
   - gcloud container clusters get-credentials multi-cluster
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" my --password-stdin
+  - docker build -t bmaleckysandbox/react-test -f ./client/Dockerfile.dev ./client
+
+scripts:
+  - docker run -e CI=true bmaleckysandbox/react-test npm test
+  
